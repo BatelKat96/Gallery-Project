@@ -44,6 +44,7 @@ function init() {
   console.log('start:')
 
   renderPortfolio()
+
 }
 
 
@@ -65,64 +66,41 @@ function renderPortfolio() {
 </div>
 `)
   $('.portfolio-container').html(strHTMLs)
+  addProtfolioEventListeners()
 }
+
+
 
 
 function addProtfolioEventListeners() {
   $('.portfolio-link').on('click', function () {
-    const protfolioId = $(this).closest('.portfolio-item').data('protfolioId')
-    onOpenModal(protfolioId)
+    var protfolioId = $(this).closest('.portfolio-item').data('portfolioId')
+    console.log('protfolioId:', protfolioId)
+
+    onRenderModal(protfolioId)
   })
 
 }
 
-// function renderModal(protfolioId) {
-//   var protfolio = 
-//   const strHTMLs = protfolios.map(protfolio => `
 
-// <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-//     <div class="modal-dialog">
-//       <div class="modal-content">
-//         <div class="close-modal" data-dismiss="modal">
-//           <div class="lr">
-//             <div class="rl"></div>
-//           </div>
-//         </div>
-//         <div class="container">
-//           <div class="row">
-//             <div class="col-lg-8 mx-auto">
-//               <div class="modal-body">
-//                 <!-- Project Details Go Here -->
-//                 <h2>Project Name</h2>
-//                 <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-//                 <img class="img-fluid d-block mx-auto" src="img/portfolio/01-full.jpg" alt="">
-//                 <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est
-//                   blanditiis
-//                   dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae
-//                   cupiditate,
-//                   maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-//                 <ul class="list-inline">
-//                   <li>Date: January 2017</li>
-//                   <li>Client: Threads</li>
-//                   <li>Category: Illustration</li>
-//                 </ul>
-//                 <button class="btn btn-primary" data-dismiss="modal" type="button">
-//                   <i class="fa fa-times"></i>
-//                   Close Project</button>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   </div>
+function onRenderModal(protfolioId) {
+  var protfolio = getProfolioById(protfolioId)
+  var date = publishDate(protfolio.publishedAt)
 
-// `)
-// // }
+  var strHTMLs = `
+
+  <h2>${protfolio.name}</h2> 
+  <p class="item-intro text-muted">${protfolio.title}.</p>
+  <img class="img-fluid d-block mx-auto" src="img/portfolio/${protfolio.id}.jpg" alt="">
+  <p>${protfolio.desc}</p>
+  <ul class="list-inline">
+    <li>Date: ${date} </li>
+  </ul>
+  <button class="btn btn-primary" data-dismiss="modal" type="button">
+    <i class="fa fa-times"></i>
+    Close Project</button>
+`
+  $('.modal-body').html(strHTMLs)
+}
 
 
-
-// function getProfolioById(carId) {
-//   const car = gCars.find(car => carId === car.id)
-//   return car
-// }
