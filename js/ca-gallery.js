@@ -38,11 +38,11 @@
 })(jQuery); // End of use strict
 
 
-$(document).ready(init)
+$(document).ready(initPage)
 
-function init() {
+function initPage() {
   console.log('start:')
-
+  addEventListeners()
   renderPortfolio()
 
 }
@@ -70,25 +70,11 @@ function renderPortfolio() {
 }
 
 
-
-
-function addProtfolioEventListeners() {
-  $('.portfolio-link').on('click', function () {
-    var protfolioId = $(this).closest('.portfolio-item').data('portfolioId')
-    console.log('protfolioId:', protfolioId)
-
-    onRenderModal(protfolioId)
-  })
-
-}
-
-
 function onRenderModal(protfolioId) {
   var protfolio = getProfolioById(protfolioId)
   var date = publishDate(protfolio.publishedAt)
 
   var strHTMLs = `
-
   <h2>${protfolio.name}</h2> 
   <p class="item-intro text-muted">${protfolio.title}.</p>
   <img class="img-fluid d-block mx-auto" src="img/portfolio/${protfolio.id}.jpg" alt="">
@@ -96,11 +82,49 @@ function onRenderModal(protfolioId) {
   <ul class="list-inline">
     <li>Date: ${date} </li>
   </ul>
+  <button  class="btn btn-url" data-portfolio-id="${protfolio.id}" type="button">Check out the project!</button>
+  <br\>
+  <br\>
   <button class="btn btn-primary" data-dismiss="modal" type="button">
     <i class="fa fa-times"></i>
     Close Project</button>
 `
   $('.modal-body').html(strHTMLs)
+  addProtfolioEventListeners()
+}
+
+function addProtfolioEventListeners() {
+  $('.portfolio-link').on('click', function () {
+    var portfolioId = $(this).closest('.portfolio-item').data('portfolioId')
+    console.log('protfolioId:', portfolioId)
+    onRenderModal(portfolioId)
+  })
+
+  $('.btn-url').on('click', function () {
+    var portfolioId = $(this).data('portfolioId')
+    var protfolio = getProfolioById(portfolioId)
+    window.open(protfolio.url, "_blank")
+  })
 }
 
 
+function addEventListeners() {
+  $('.btn-email').on('click', function (e) {
+    e.preventDefault()
+    // var email = $('#email').val()
+
+    var subject = $('#subject').val()
+    var textMsg = $('#textMsg').val()
+
+    sendMsg(subject, textMsg)
+
+    $('#email').val('')
+    $('#subject').val('')
+    $('#textMsg').val('')
+  })
+}
+
+function sendMsg(subject, textMsg) {
+  var emailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=batelkat@gmail.com&su=${subject}&body=${textMsg}`
+  window.open(emailLink, "_blank")
+}

@@ -22,25 +22,18 @@ function getProtfolios() {
             publishedAt: 1448693940200,
             labels: ["Games", "Mine Sweeper"],
         }
-
     ]
     return gProtfolios
-
 }
-
 
 function getProfolioById(protfolioId) {
     const protfolio = gProtfolios.find(protfolio => protfolioId === protfolio.id)
-    console.log('protfolio:', protfolio)
-
     return protfolio
 }
-// date()
 
 function publishDate(timestamps) {
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     var date = new Date(timestamps)
-    console.log('date:', date)
     var year = (date.getFullYear())
     var month = months[date.getMonth()]
     newDate = month + ' ' + year
