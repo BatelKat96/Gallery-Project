@@ -49,10 +49,15 @@ section h3.section-subheading {
     font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+.me-section {
+    background-color: #95f9ed8e;
+    padding: 10px;
+}
+
 @media (min-width: 768px) {
-    section {
-        padding: 150px 0;
-    }
+    /* section {
+        /* padding: 150px 0; */
+    /* } */
 }
 
 ::-moz-selection {
