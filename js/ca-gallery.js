@@ -82,7 +82,7 @@ function onRenderModal(protfolioId) {
   <ul class="list-inline">
     <li>Date: ${date} </li>
   </ul>
-  <button  class="btn btn-url" data-portfolio-id="${protfolio.id}" type="button">Check out the project!</button>
+  <button  class="btn btn-primary btn-url" data-portfolio-id="${protfolio.id}" type="button">Check out the project!</button>
   <br\>
   <br\>
   <button class="btn btn-primary" data-dismiss="modal" type="button">
